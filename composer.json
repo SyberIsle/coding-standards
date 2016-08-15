@@ -1,0 +1,17 @@
+{
+  "name": "syberisle/coding-standards",
+  "description": "PHP_CodeSniffer rules to enforce SyberIsle coding conventions",
+  "keywords" : ["phpcs", "standards", "SyberIsle"],
+  "license" : "MIT",
+  "require" : {
+    "squizlabs/php_codesniffer": "^2.6"
+  },
+  "minimum-stability" : "RC",
+  "support" : {
+    "issues" : "https://github.com/SyberIsle/coding-standards/issues"
+  },
+  "scripts"    : {
+    "post-install-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths .",
+    "post-update-cmd" : "\"vendor/bin/phpcs\" --config-set installed_paths ."
+  }
+}
