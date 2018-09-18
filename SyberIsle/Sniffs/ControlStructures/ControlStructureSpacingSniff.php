@@ -19,16 +19,18 @@
  * } while (...);
  * ```
  */
-class SyberIsle_Sniffs_ControlStructures_ControlStructureSpacingSniff extends PHP_CodeSniffer_Standards_AbstractPatternSniff
-{
 
+namespace SyberIsle\Sniffs\ControlStructures;
+
+class ControlStructureSpacingSniff
+	extends \PHP_CodeSniffer\Sniffs\AbstractPatternSniff
+{
 	/**
 	 * If true, comments will be ignored if they are found in the code.
 	 *
 	 * @var boolean
 	 */
 	public $ignoreComments = true;
-
 
 	/**
 	 * Returns the patterns that this test wishes to verify.
@@ -48,11 +50,7 @@ class SyberIsle_Sniffs_ControlStructures_ControlStructureSpacingSniff extends PH
 			'if (...) {EOL',
 			'foreach (...) {EOL',
 			'}EOLelseif (...) {EOL',
-			'}EOLelse {EOL',
-
+			'}EOLelse {EOL'
 		);
-
-	}//end getPatterns()
-
-
+	}
 }

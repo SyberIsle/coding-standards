@@ -14,9 +14,15 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
-if (class_exists('PEAR_Sniffs_Classes_ClassDeclarationSniff', true) === false) {
-	$error = 'Class PEAR_Sniffs_Classes_ClassDeclarationSniff not found';
-	throw new PHP_CodeSniffer_Exception($error);
+namespace SyberIsle\Sniffs\Classes;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\Classes\ClassDeclarationSniff as PearClassDeclarationSniff;
+use PHP_CodeSniffer\Util\Tokens;
+
+if (class_exists(PearClassDeclarationSniff::class, true) === false) {
+	$error = 'Class ' . PearClassDeclarationSniff::class . ' not found';
+	throw new \PHP_CodeSniffer\Exceptions\RuntimeException($error);
 }
 
 /**
@@ -34,20 +40,19 @@ if (class_exists('PEAR_Sniffs_Classes_ClassDeclarationSniff', true) === false) {
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
-class SyberIsle_Sniffs_Classes_ClassDeclarationSniff
-	extends PEAR_Sniffs_Classes_ClassDeclarationSniff
+class ClassDeclarationSniff
+	extends PearClassDeclarationSniff
 {
-
 	/**
 	 * Processes this test, when one of its tokens is encountered.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile  The file being scanned.
-	 * @param int                  $stackPtr   The position of the current token
+	 * @param File $phpcsFile                  The file being scanned.
+	 * @param int  $stackPtr                   The position of the current token
 	 *                                         in the stack passed in $tokens.
 	 *
 	 * @return void
 	 */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+	public function process(File $phpcsFile, $stackPtr)
 	{
 		// We want all the errors from the PEAR standard, plus some of our own.
 		parent::process($phpcsFile, $stackPtr);
@@ -64,13 +69,13 @@ class SyberIsle_Sniffs_Classes_ClassDeclarationSniff
 	/**
 	 * Processes the opening section of a class declaration.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+	 * @param File $phpcsFile The file being scanned.
 	 * @param int                  $stackPtr  The position of the current token
 	 *                                        in the stack passed in $tokens.
 	 *
 	 * @return void
 	 */
-	public function processOpen(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+	public function processOpen(File $phpcsFile, $stackPtr)
 	{
 		$tokens       = $phpcsFile->getTokens();
 		$stackPtrType = strtolower($tokens[$stackPtr]['content']);
@@ -234,7 +239,7 @@ class SyberIsle_Sniffs_Classes_ClassDeclarationSniff
 		$implements          = $phpcsFile->findNext($keywordTokenType, ($stackPtr + 1), $openingBrace);
 		$multiLineImplements = false;
 		if ($implements !== false) {
-			$prev = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($openingBrace - 1), $implements, true);
+			$prev = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($openingBrace - 1), $implements, true);
 			if ($tokens[$prev]['line'] !== $tokens[$implements]['line']) {
 				$multiLineImplements = true;
 			}
@@ -424,6 +429,5 @@ class SyberIsle_Sniffs_Classes_ClassDeclarationSniff
 				$nextComma = ($className + 1);
 			}
 		}
-
 	}
 }

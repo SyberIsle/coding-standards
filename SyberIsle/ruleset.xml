@@ -14,6 +14,10 @@
 		<!-- We use tabs not spaces -->
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="PSR2.Sniffs.ControlStructures.ControlStructureSpacingSniff"/>
+		<exclude name="PSR2.Sniffs.ControlStructures.ControlStructureSpacingSniff"/>
+		<exclude name="PSR2.Sniffs.Files.EndFileNewlineSniff"/>
+		<exclude name="PSR2.ControlStructures.ControlStructureSpacing"/>
+		<exclude name="PSR2.Files.EndFileNewline"/>
 		<exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace"/>
 		<!-- We check this separately as extends/implements should be on their own line -->
 		<exclude name="PSR2.Classes.ClassDeclaration.ImplementsLine"/>
